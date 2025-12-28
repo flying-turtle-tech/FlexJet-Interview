@@ -10,7 +10,7 @@ import Foundation
 struct Flight: Codable {
     let id: String
     let tripNumber: String
-    let flightNumber: String
+    let flightNumber: String?
     let tailNumber: String
     let origin: String
     let originIata: String
@@ -22,4 +22,8 @@ struct Flight: Codable {
     let arrival: Date
     // Prive in cents
     let price: Int
+}
+
+struct FlightResponse: Codable {
+    let response: [Flight]
 }
