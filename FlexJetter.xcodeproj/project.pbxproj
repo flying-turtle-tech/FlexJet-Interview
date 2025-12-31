@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ABD8BF0E2F0317A300B72338 /* SwiftSecurity in Frameworks */ = {isa = PBXBuildFile; productRef = ABD8BF0D2F0317A300B72338 /* SwiftSecurity */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		ABD8BE872F0192EE00B72338 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +33,22 @@
 		ABD8BE902F0192EE00B72338 /* FlexJetterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlexJetterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		ABD8BF522F03602E00B72338 /* Exceptions for "FlexJetter" folder in "FlexJetter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ABD8BE762F0192EC00B72338 /* FlexJetter */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		ABD8BE792F0192EC00B72338 /* FlexJetter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				ABD8BF522F03602E00B72338 /* Exceptions for "FlexJetter" folder in "FlexJetter" target */,
+			);
 			path = FlexJetter;
 			sourceTree = "<group>";
 		};
@@ -52,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABD8BF0E2F0317A300B72338 /* SwiftSecurity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +130,7 @@
 			);
 			name = FlexJetter;
 			packageProductDependencies = (
+				ABD8BF0D2F0317A300B72338 /* SwiftSecurity */,
 			);
 			productName = FlexJetter;
 			productReference = ABD8BE772F0192EC00B72338 /* FlexJetter.app */;
@@ -195,6 +214,9 @@
 			);
 			mainGroup = ABD8BE6E2F0192EC00B72338;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ABD8BF0C2F0317A300B72338 /* XCRemoteSwiftPackageReference "swift-security" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ABD8BE782F0192EC00B72338 /* Products */;
 			projectDirPath = "";
@@ -400,6 +422,7 @@
 				DEVELOPMENT_TEAM = J66RNPR5C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FlexJetter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +455,7 @@
 				DEVELOPMENT_TEAM = J66RNPR5C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FlexJetter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -578,6 +602,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ABD8BF0C2F0317A300B72338 /* XCRemoteSwiftPackageReference "swift-security" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dm-zharov/swift-security.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ABD8BF0D2F0317A300B72338 /* SwiftSecurity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABD8BF0C2F0317A300B72338 /* XCRemoteSwiftPackageReference "swift-security" */;
+			productName = SwiftSecurity;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ABD8BE6F2F0192EC00B72338 /* Project object */;
 }

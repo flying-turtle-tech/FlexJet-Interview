@@ -6,17 +6,22 @@
 //
 
 import Foundation
+import SwiftSecurity
+import Combine
 
-final class AuthenicationService {
-    var token: String?
+// Future: Replace ObservableObject with Observable when no longer supporting iOS 16
+final class AuthenicationService: ObservableObject {
+    private static let credentialName = "flexjetter"
+    let keychain = Keychain.default
+    @Published var token: String?
+    
+    init() {
+        token = try? keychain.retrieve(.credential(for: Self.credentialName))
+    }
+    
     var loggedIn: Bool {
         get {
             token != nil
-        }
-        set {
-            if newValue == false {
-                token = nil
-            }
         }
     }
     
@@ -25,10 +30,16 @@ final class AuthenicationService {
             return false
         }
         self.token = token
+        try? keychain.store(token, query: .credential(for: Self.credentialName))
         return true
     }
     
     func logout() {
-        loggedIn = false
+        token = nil
+        do {
+            try keychain.remove(.credential(for: Self.credentialName))
+        } catch {
+            print("Error removing keychain token: \(error.localizedDescription)")
+        }
     }
 }

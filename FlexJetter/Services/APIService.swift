@@ -12,9 +12,7 @@ final class APIService {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     static let shared = APIService()
-    
-    private init() {}
-    
+        
     func signIn(username: String, password: String) async -> String? {
         guard let baseUrl else { return nil }
         let url = baseUrl.appending(path: "api/signIn")
@@ -23,7 +21,7 @@ final class APIService {
         let payload = LoginRequest(username: username, password: password)
         do {
             request.httpBody = try encoder.encode(payload)
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await URLSession.shared.data(for: request)
             let result = try decoder.decode(LoginResponse.self, from: data)
             return result.token
         } catch {

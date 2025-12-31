@@ -11,8 +11,9 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    @EnvironmentObject private var authService: AuthenicationService
 
-    var body: some View {
+    private var mainView: some View {
         TabView {
             Tab("Flights", systemImage: "airplane") {
                 FlightsMainView()
@@ -27,6 +28,18 @@ struct ContentView: View {
                 UnderConstructionView()
             }
         }.symbolVariant(.none)
+    }
+    
+    
+    var body: some View {
+        Group {
+            if authService.loggedIn {
+                mainView
+            } else {
+                LoginView()
+            }
+        }
+        
     }
 
     private func addItem() {
