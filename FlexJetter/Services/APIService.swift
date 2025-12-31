@@ -13,7 +13,7 @@ final class APIService {
     private let encoder = JSONEncoder()
     static let shared = APIService()
         
-    func signIn(username: String, password: String) async -> String? {
+    func signIn(username: String, password: String) async throws -> String? {
         guard let baseUrl else { return nil }
         let url = baseUrl.appending(path: "api/signIn")
         var request = URLRequest(url: url)
@@ -25,12 +25,11 @@ final class APIService {
             let result = try decoder.decode(LoginResponse.self, from: data)
             return result.token
         } catch {
-            print(error)
-            return nil
+            throw error
         }
     }
     
-    func loadFlights(token: String) async -> [Flight]? {
+    func loadFlights(token: String) async throws -> [Flight]? {
         guard let baseUrl else { return nil }
         let url = baseUrl.appending(path: "api/flights")
         var request = URLRequest(url: url)
@@ -40,8 +39,7 @@ final class APIService {
             let result = try decoder.decode([Flight].self, from: data)
             return result
         } catch {
-            print(error)
-            return nil
+            throw error
         }
     }
     

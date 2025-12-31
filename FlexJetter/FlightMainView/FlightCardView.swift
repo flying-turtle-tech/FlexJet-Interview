@@ -65,6 +65,7 @@ struct FlightCardView: View {
                 .strokeBorder(Color.grey, lineWidth: flight.showTodayBadge ? 0 : 1)
         }
         .if(flight.showTodayBadge) { view in
+            // Only show shadow when Flight is today.
             view.background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(Color.white)

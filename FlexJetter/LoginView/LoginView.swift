@@ -11,6 +11,7 @@ struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var loading: Bool = false
+    @State private var errorMessage: String?
 
     @EnvironmentObject var authService: AuthenicationService
     
@@ -54,6 +55,11 @@ struct LoginView: View {
                               .clipShape(.buttonBorder)
                     }
                 }
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundStyle(Color.red)
+                        .padding()
+                }
             }
         }
     }
@@ -61,8 +67,13 @@ struct LoginView: View {
     private func handleLogin() {
         loading = true
         Task {
-            let _ = await authService.login(username: username, password: password)
-            loading = false
+            do {
+                let _ = try await authService.login(username: username, password: password)
+                loading = false
+            } catch {
+                print(error)
+                errorMessage = "Failed to login. Please try again."
+            }
         }
     }
 }

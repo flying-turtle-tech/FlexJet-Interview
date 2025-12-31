@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct UnderConstructionView: View {
+    @EnvironmentObject var authService: AuthenicationService
+    
     var body: some View {
-        Text("Under Construction...")
+        VStack(spacing: 48) {
+            Text("Under Construction...")
+            
+            Button {
+                authService.logout()
+            } label: {
+                Text("Logout").foregroundStyle(Color.white)
+            }
+            .padding()
+            .background(Color.accent)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
+        }
+        
     }
 }
 
 #Preview {
-    UnderConstructionView()
+    UnderConstructionView().environmentObject(AuthenicationService())
 }

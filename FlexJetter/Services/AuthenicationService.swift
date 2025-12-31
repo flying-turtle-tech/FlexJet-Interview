@@ -9,6 +9,10 @@ import Foundation
 import SwiftSecurity
 import Combine
 
+enum LoginError: Error {
+    case loginFailed
+}
+
 // Future: Replace ObservableObject with Observable when no longer supporting iOS 16
 final class AuthenicationService: ObservableObject {
     private static let credentialName = "flexjetter"
@@ -25,13 +29,17 @@ final class AuthenicationService: ObservableObject {
         }
     }
     
-    func login(username: String, password: String) async -> Bool {
-        guard let token = await APIService.shared.signIn(username: username, password: password) else {
-            return false
+    func login(username: String, password: String) async throws -> Bool {
+        do {
+            guard let token = try await APIService.shared.signIn(username: username, password: password) else {
+                throw LoginError.loginFailed
+            }
+            self.token = token
+            try? keychain.store(token, query: .credential(for: Self.credentialName))
+            return true
+        } catch {
+            throw error
         }
-        self.token = token
-        try? keychain.store(token, query: .credential(for: Self.credentialName))
-        return true
     }
     
     func logout() {
