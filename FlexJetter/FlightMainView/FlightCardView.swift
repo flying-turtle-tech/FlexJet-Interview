@@ -23,22 +23,22 @@ struct FlightCardView: View {
             VStack(spacing: 0) {
                 Text(flight.month.uppercased())
                     .frame(width: 48, height: 18)
-                    .font(.custom("ProximaNova-Semibold", size: 12))
+                    .font(.custom(.semiBold, relativeTo: .caption))
                     .foregroundStyle(flight.past ? Color.darkGrey : Color.accent)
                     .background(flight.past ? Color.grey : Color.primaryFaded)
                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 4, topTrailingRadius: 4))
 
                 Text(flight.day)
                     .frame(width: 48, height: 30)
-                    .font(.custom("ProximaNova-Semibold", size: 18))
+                    .font(.custom(.semiBold, relativeTo: .headline))
                     .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 4, bottomTrailingRadius: 4))
                     .background(Color.offWhite)
             }.frame(width: 48, height: 48)
             VStack(alignment: .leading, spacing: 4) {
                 Text(flight.title)
-                    .font(.custom("ProximaNova-Semibold", size: 14))
+                    .font(.custom(.semiBold, relativeTo: .footnote))
                 Text(flight.subtitle ?? "")
-                    .font(.custom("ProximaNova-Regular", size: 14))
+                    .font(.custom(.regular, relativeTo: .footnote))
                     .foregroundStyle(Color.darkGrey)
             }
             Spacer()
@@ -51,7 +51,7 @@ struct FlightCardView: View {
                     Image(systemName: "calendar")
                     Text("Flight Today")
                 }
-                .font(.custom("ProximaNova-Extrabld", size: 14))
+                .font(.custom(.extraBold, relativeTo: .footnote))
                 .padding(.vertical, 4)
                 .padding(.horizontal, 16)
                 .background(Color.accent)

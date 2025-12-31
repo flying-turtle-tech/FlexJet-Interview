@@ -30,26 +30,30 @@ struct FlightsMainView: View {
         }
     }
     
+    @ViewBuilder
     var FlightsView: some View {
-        ScrollView {
-            LazyVStack {
-                if upcomingOrPast == 0 {
-                    upcomingFlights
-                } else {
-                    pastFlights
+        if isLoading {
+            ProgressView()
+        } else {
+            ScrollView {
+                LazyVStack {
+                    if upcomingOrPast == 0 {
+                        upcomingFlights
+                    } else {
+                        pastFlights
+                    }
                 }
             }
         }
-        
     }
     
     var body: some View {
         HStack {
-            Text("Flights").font(.custom("ProximaNove-Extrabld", size: 32))
+            Text("Flights").font(.custom(.semiBold, relativeTo: .title2))
             Spacer()
             Button("", systemImage: "plus.square.fill") {
                 addFlight = true
-            }
+            }.font(.system(size: 24))
             .alert("Not Supported", isPresented: $addFlight) {
                 Button("OK", role: .cancel) {
                     addFlight = false
