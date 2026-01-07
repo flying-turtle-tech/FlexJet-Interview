@@ -18,14 +18,16 @@ final class FlightFetcher: ObservableObject {
         self.authService = authService
     }
     
-    func fetchFlights() async {
+    func fetchFlights() async -> [Flight]? {
         guard let token = authService.token else {
-            return
+            return nil
         }
         do {
             flights = try await apiService.loadFlights(token: token) ?? []
+            return flights
         } catch {
             errorMessage = "Failed to get flights. Please try again or contact support if the issue persists."
+            return nil
         }
     }
 }

@@ -7,15 +7,19 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
-@Observable
-final class FlightMainViewModel {
-    
-    var upcomingFlights: [Flight] = []
-    var pastFlights: [Flight] = []
-    
-    func loadFlights() async {
-        
+final class FlightMainViewModel: ObservableObject {
+    @Published var flights: [Flight] = []
+    var upcomingFlights: [Flight] {
+        flights.filter({ $0.arrival >= Date.now})
+    }
+    var pastFlights: [Flight] {
+        flights.filter({ $0.arrival < Date.now})
     }
     
+    func loadFlights(using fetcher: FlightFetcher) async {
+        flights = await fetcher.fetchFlights() ?? []
+    }
+
 }

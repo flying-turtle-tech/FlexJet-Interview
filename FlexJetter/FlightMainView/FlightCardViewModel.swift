@@ -7,29 +7,29 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
-struct FlightViewModel: Identifiable {
-    let id: String
+class FlightCardViewModel: ObservableObject, Identifiable {
+    var flight: Flight
     
-    let month: String
-    let day: String
-    let title: String
-    let subtitle: String?
-    let completed: Bool
-    let showTodayBadge: Bool
-    let past: Bool
+    var id: String {
+        flight.id
+    }
     
-    init(flight: Flight) {
-        id = flight.id
-        month = flight.departure.formatted(.dateTime.month(.abbreviated))
-        day = flight.departure.formatted(.dateTime.day(.twoDigits))
-        
+    var month: String {
+        flight.departure.formatted(.dateTime.month(.abbreviated))
+    }
+    var day: String {
+        flight.departure.formatted(.dateTime.day(.twoDigits))
+    }
+    var title: String {
         let originIndex = flight.origin.firstIndex(of: "(") ?? flight.origin.endIndex
         let origin = flight.origin.prefix(upTo: originIndex).trimmingCharacters(in: .whitespacesAndNewlines)
         let destinationIndex = flight.destination.firstIndex(of: "(") ?? flight.destination.endIndex
         let destination = flight.destination.prefix(upTo: destinationIndex).trimmingCharacters(in: .whitespacesAndNewlines)
-        title = [origin, "to", destination].joined(separator: " ")
-        
+        return [origin, "to", destination].joined(separator: " ")
+    }
+    var subtitle: String? {
         let timeFrame = flight.departure.formatted(
             .dateTime
                 .hour(.twoDigits(amPM: .abbreviated))
@@ -41,10 +41,21 @@ struct FlightViewModel: Identifiable {
                 .hour(.twoDigits(amPM: .abbreviated))
                 .minute(.twoDigits).second(.omitted)
         )
-        
-        past = flight.arrival < Date.now
-        subtitle = past ? flight.flightNumber : timeFrame
-        showTodayBadge = Calendar.autoupdatingCurrent.isDateInToday(flight.departure) && Date.now < flight.departure
-        self.completed = false
+        return past ? flight.flightNumber : timeFrame
+    }
+    
+    var showTodayBadge: Bool {
+        Calendar.autoupdatingCurrent.isDateInToday(flight.departure) && Date.now < flight.departure
+    }
+    var past: Bool {
+        flight.arrival < Date.now
+    }
+    
+    var completed: Bool {
+        flight.completed
+    }
+    
+    init(flight: Flight) {
+        self.flight = flight
     }
 }

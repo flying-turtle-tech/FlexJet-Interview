@@ -8,43 +8,46 @@
 import SwiftUI
 
 struct FlightCardView: View {
-    @State private var flight: FlightViewModel
+    @StateObject var viewModel: FlightCardViewModel
+//    @Binding var flight: Flight
     
     init(flight: Flight) {
-        _flight = State(wrappedValue: FlightViewModel(flight: flight))
-    }
-    
-    init(viewModel: FlightViewModel) {
-        _flight = State(wrappedValue: viewModel)
+//        _flight = flight
+        _viewModel = StateObject(wrappedValue: FlightCardViewModel(flight: flight))
     }
     
     var body: some View {
+        let _ = print("Card rendering - completed: \(viewModel.completed)")
         HStack {
             VStack(spacing: 0) {
-                Text(flight.month.uppercased())
+                Text(viewModel.month.uppercased())
                     .frame(width: 48, height: 18)
                     .font(.custom(.semiBold, relativeTo: .caption))
-                    .foregroundStyle(flight.past ? Color.darkGrey : Color.accent)
-                    .background(flight.past ? Color.grey : Color.primaryFaded)
+                    .foregroundStyle(viewModel.past ? Color.darkGrey : Color.accent)
+                    .background(viewModel.past ? Color.grey : Color.primaryFaded)
                     .clipShape(UnevenRoundedRectangle(topLeadingRadius: 4, topTrailingRadius: 4))
 
-                Text(flight.day)
+                Text(viewModel.day)
                     .frame(width: 48, height: 30)
                     .font(.custom(.semiBold, relativeTo: .headline))
                     .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 4, bottomTrailingRadius: 4))
                     .background(Color.offWhite)
+                    .foregroundStyle(Color.darkText)
             }.frame(width: 48, height: 48)
             VStack(alignment: .leading, spacing: 4) {
-                Text(flight.title)
+                Text(viewModel.title)
                     .font(.custom(.semiBold, relativeTo: .footnote))
-                Text(flight.subtitle ?? "")
+                    .foregroundStyle(Color.darkText)
+                Text(viewModel.subtitle ?? "")
                     .font(.custom(.regular, relativeTo: .footnote))
                     .foregroundStyle(Color.darkGrey)
             }
             Spacer()
-            Image(systemName: "checkmark.seal").font(.system(size: 24))
+            Image(systemName: viewModel.completed ? "checkmark.seal.fill" : "checkmark.seal")
+                .font(.system(size: 24))
+                .foregroundStyle(viewModel.completed ? Color.accent : Color.black)
         }
-        .if(flight.showTodayBadge) { view in
+        .if(viewModel.showTodayBadge) { view in
             VStack(alignment: .leading) {
                 view
                 HStack(spacing: 10) {
@@ -62,9 +65,9 @@ struct FlightCardView: View {
         .padding()
         .overlay {
             RoundedRectangle(cornerRadius: 16)
-                .strokeBorder(Color.grey, lineWidth: flight.showTodayBadge ? 0 : 1)
+                .strokeBorder(Color.grey, lineWidth: viewModel.showTodayBadge ? 0 : 1)
         }
-        .if(flight.showTodayBadge) { view in
+        .if(viewModel.showTodayBadge) { view in
             // Only show shadow when Flight is today.
             view.background(
                     RoundedRectangle(cornerRadius: 16)
@@ -85,20 +88,20 @@ extension View {
     }
 }
 
-
-#Preview(traits: .sizeThatFitsLayout) {
-    FlightCardView(flight:
-    Flight(
-        id: "1234",
-        tripNumber: "1000001",
-        flightNumber: "UA203",
-        tailNumber: "FLX202",
-        origin: "Boston Logan Airport (BOS)",
-        originIata: "BOS",
-        destination: "John F Kennedy Airport (JFK)",
-        destinationIata: "JFK",
-        departure: Date.now.advanced(by: 100),
-        arrival: Date.now.advanced(by: 5000),
-        price: 18000)
-    )
-}
+//
+//#Preview(traits: .sizeThatFitsLayout) {
+//    FlightCardView(flight:
+//    Flight(
+//        id: "1234",
+//        tripNumber: "1000001",
+//        flightNumber: "UA203",
+//        tailNumber: "FLX202",
+//        origin: "Boston Logan Airport (BOS)",
+//        originIata: "BOS",
+//        destination: "John F Kennedy Airport (JFK)",
+//        destinationIata: "JFK",
+//        departure: Date.now.advanced(by: 100),
+//        arrival: Date.now.advanced(by: 5000),
+//        price: 18000)
+//    )
+//}

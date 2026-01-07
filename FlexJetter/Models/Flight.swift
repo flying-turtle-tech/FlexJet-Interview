@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Flight: Codable, Identifiable {
+struct Flight: Codable, Identifiable, Hashable {
     let id: String
     let tripNumber: String
     let flightNumber: String?
@@ -29,6 +29,7 @@ struct Flight: Codable, Identifiable {
     let arrival: Date
     /// Prive in cents
     let price: Int
+    var completed: Bool
     
     static let apiDateFormatter: DateFormatter = {
             let formatter = DateFormatter()
@@ -61,9 +62,10 @@ struct Flight: Codable, Identifiable {
             throw DecodingError.dataCorrupted(.init(codingPath: [Flight.CodingKeys.arrival], debugDescription: "Failed to format arrival date"))
         }
         self.price = try container.decode(Int.self, forKey: .price)
+        self.completed = false
     }
     
-    init(id: String, tripNumber: String, flightNumber: String?, tailNumber: String, origin: String, originIata: String, destination: String, destinationIata: String, departure: Date, arrival: Date, price: Int) {
+    init(id: String, tripNumber: String, flightNumber: String?, tailNumber: String, origin: String, originIata: String, destination: String, destinationIata: String, departure: Date, arrival: Date, price: Int, completed: Bool = false) {
         self.id = id
         self.tripNumber = tripNumber
         self.flightNumber = flightNumber
@@ -75,6 +77,11 @@ struct Flight: Codable, Identifiable {
         self.departure = departure
         self.arrival = arrival
         self.price = price
+        self.completed = completed
+    }
+    
+    static func == (lhs: Flight, rhs: Flight) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
