@@ -31,14 +31,11 @@ struct ContentView: View {
     
     
     var body: some View {
-        Group {
             if authService.loggedIn {
                 mainView
             } else {
                 LoginView()
             }
-        }
-        
     }
 
     

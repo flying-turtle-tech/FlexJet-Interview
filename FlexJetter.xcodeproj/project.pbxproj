@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ABD8BF0E2F0317A300B72338 /* SwiftSecurity in Frameworks */ = {isa = PBXBuildFile; productRef = ABD8BF0D2F0317A300B72338 /* SwiftSecurity */; };
+		ABD8BF672F0E1BC400B72338 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ABD8BF662F0E1BC400B72338 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		ABD8BE772F0192EC00B72338 /* FlexJetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlexJetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD8BE862F0192EE00B72338 /* FlexJetterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlexJetterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD8BE902F0192EE00B72338 /* FlexJetterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlexJetterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABD8BF662F0E1BC400B72338 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,6 +95,7 @@
 		ABD8BE6E2F0192EC00B72338 = {
 			isa = PBXGroup;
 			children = (
+				ABD8BF662F0E1BC400B72338 /* README.md */,
 				ABD8BE792F0192EC00B72338 /* FlexJetter */,
 				ABD8BE892F0192EE00B72338 /* FlexJetterTests */,
 				ABD8BE932F0192EE00B72338 /* FlexJetterUITests */,
@@ -234,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABD8BF672F0E1BC400B72338 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

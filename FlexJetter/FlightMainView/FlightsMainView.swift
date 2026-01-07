@@ -57,20 +57,29 @@ struct FlightsMainView: View {
         }
     }
     
+    private var upcomingAndPastFlightsView: some View {
+        ScrollView {
+            LazyVStack {
+                if upcomingOrPast == 0 {
+                    upcomingFlights
+                } else {
+                    pastFlights
+                }
+            }
+        }
+    }
+    
     @ViewBuilder
     private var FlightsView: some View {
         if isLoading {
             ProgressView()
-        } else {
-            ScrollView {
-                LazyVStack {
-                    if upcomingOrPast == 0 {
-                        upcomingFlights
-                    } else {
-                        pastFlights
-                    }
-                }
+                .progressViewStyle(.circular)
+                .scaleEffect(1.5)
+            if !flightFetcher.flights.isEmpty {
+                upcomingAndPastFlightsView
             }
+        } else {
+            upcomingAndPastFlightsView
         }
     }
     
