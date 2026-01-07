@@ -18,12 +18,6 @@ struct FlexJetterApp: App {
         let flightFetcher = FlightFetcher(authService: authService)
         _authService = StateObject(wrappedValue: authService)
         _flightFetcher = StateObject(wrappedValue: flightFetcher)
-        for family: String in UIFont.familyNames {
-            print(family)
-            for names: String in UIFont.fontNames(forFamilyName: family) {
-                print("== \(names)")
-            }
-        }
     }
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
