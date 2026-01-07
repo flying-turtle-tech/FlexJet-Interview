@@ -9,15 +9,14 @@ import SwiftUI
 
 struct FlightCardView: View {
     @StateObject var viewModel: FlightCardViewModel
-//    @Binding var flight: Flight
+    @Binding var completed: Bool
     
-    init(flight: Flight) {
-//        _flight = flight
+    init(flight: Flight, completed: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: FlightCardViewModel(flight: flight))
+        _completed = completed
     }
     
     var body: some View {
-        let _ = print("Card rendering - completed: \(viewModel.completed)")
         HStack {
             VStack(spacing: 0) {
                 Text(viewModel.month.uppercased())
@@ -43,9 +42,9 @@ struct FlightCardView: View {
                     .foregroundStyle(Color.darkGrey)
             }
             Spacer()
-            Image(systemName: viewModel.completed ? "checkmark.seal.fill" : "checkmark.seal")
+            Image(systemName: completed ? "checkmark.seal.fill" : "checkmark.seal")
                 .font(.system(size: 24))
-                .foregroundStyle(viewModel.completed ? Color.accent : Color.black)
+                .foregroundStyle(completed ? Color.accent : Color.black)
         }
         .if(viewModel.showTodayBadge) { view in
             VStack(alignment: .leading) {

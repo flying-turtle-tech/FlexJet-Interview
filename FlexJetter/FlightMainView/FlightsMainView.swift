@@ -39,7 +39,7 @@ struct FlightsMainView: View {
     private var upcomingFlights: some View {
         ForEach(viewModel.flights.filter({ $0.departure > Date.now })) { flight in
             NavigationLink(value: flight) {
-                FlightCardView(flight: flight)
+                FlightCardView(flight: flight, completed: Binding(get: { return false}, set: { _ in }))
                     .padding(.horizontal, 17)
                     .padding(.vertical, 7.5)
             }
@@ -49,7 +49,8 @@ struct FlightsMainView: View {
     private var pastFlights: some View {
         ForEach(viewModel.flights.filter({ $0.departure <= Date.now })) { flight in
             NavigationLink(value: flight) {
-                FlightCardView(flight: flight)
+                let completed = $viewModel.flights.first(where: { $0.wrappedValue == flight})!.completed
+                FlightCardView(flight: flight, completed: completed)
                     .padding(.horizontal, 17)
                     .padding(.vertical, 7.5)
             }
