@@ -35,4 +35,10 @@ Initial implementation notes: https://www.notion.so/FlexJet-Take-Home-Notes-2d66
 - [ ] Add delightful animations as fit
 - [ ] Add an app icon
 - [ ] Fix main flights page disappearing cards when refreshing.
-- [ ] Automatic background token refresh. (Requires backend update)
+- [ ] Fix tabs icons to match designs exactly.
+- [ ] Add Swift Linter/Formatter so that code is all formatted the same throughout
+
+### Future updates that require backend updates
+- [ ] Automatic background token refresh.
+- [ ] Make the Plus button on flights page add a flight.
+- [ ] Create pages for other tabs. (Favorites, Contracts, Profile)
