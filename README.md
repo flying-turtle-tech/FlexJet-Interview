@@ -21,7 +21,7 @@ Initial implementation notes: https://www.notion.so/FlexJet-Take-Home-Notes-2d66
     - The APIService handles networking. It has a reference to the vercel API endpoint, and formats the requests and responses.
     - The AuthenticationService handles keeping track of the user login state and interfaces with the Keychain
     - The Flight Fetcher combines the AuthenticationService with the APIService to make the flight request with the authentication token.
-    - Having these 3 service classes helps to separate concerns and increases the ability to make the app more modular if ever necessary. For instance, the API Service could be replaced with a different API Service without affecting the details of the AuthenticationService or the FlightFetcher service.
+    - Having these 3 service classes helps to separate concerns and increases the modularity of the app, making it more flexible for future updates. For instance, the API Service could be replaced with a different API Service without affecting the details of the AuthenticationService or the FlightFetcher service.
 
 ### Future Enhancements (If I had more time this is what I'd do)
 - [ ] Implement caching properly for requests. Possibly add a networking library that automatically handles caching.
