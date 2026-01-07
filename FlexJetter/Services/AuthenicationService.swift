@@ -18,9 +18,11 @@ final class AuthenicationService: ObservableObject {
     private static let credentialName = "flexjetter"
     let keychain = Keychain.default
     @Published var token: String?
+    let apiService: APIServiceable
     
     init() {
         token = try? keychain.retrieve(.credential(for: Self.credentialName))
+        apiService = APIService.shared
     }
     
     var loggedIn: Bool {
@@ -31,7 +33,7 @@ final class AuthenicationService: ObservableObject {
     
     func login(username: String, password: String) async throws -> Bool {
         do {
-            guard let token = try await APIService.shared.signIn(username: username, password: password) else {
+            guard let token = try await apiService.signIn(username: username, password: password) else {
                 throw LoginError.loginFailed
             }
             self.token = token

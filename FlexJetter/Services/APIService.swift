@@ -7,7 +7,12 @@
 
 import Foundation
 
-final class APIService {
+protocol APIServiceable {
+    func signIn(username: String, password: String) async throws -> String?
+    func loadFlights(token: String) async throws -> [Flight]?
+}
+
+final class APIService: APIServiceable {
     private let baseUrl = URL(string: "https://v0-simple-authentication-api.vercel.app/")
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()

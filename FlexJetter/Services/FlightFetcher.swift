@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class FlightFetcher: ObservableObject {
-    let apiService = APIService.shared
+    let apiService: APIServiceable = APIService.shared
     let authService: AuthenicationService
     @Published var flights: [Flight] = []
     @Published var errorMessage: String?
