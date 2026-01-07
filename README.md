@@ -34,4 +34,5 @@ Initial implementation notes: https://www.notion.so/FlexJet-Take-Home-Notes-2d66
 - [ ] Add Unit tests for Models, ViewModels, and Services. Add protocols and minor refactoring so that services can be mocked as necessary, and add any needed mocks.
 - [ ] Add delightful animations as fit
 - [ ] Add an app icon
-- [ ] Fix main flights page disappearing cards when refreshing. This is because 
+- [ ] Fix main flights page disappearing cards when refreshing.
+- [ ] Automatic background token refresh. (Requires backend update)
