@@ -72,7 +72,9 @@ struct FlightDetailView: View {
                     }
                 }.disabled(viewModel.completeButtonDisabled)
             }.padding(.horizontal, 16)
-        }.navigationTitle(flight.originIata + " to " + flight.destinationIata)
+        }
+        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle(flight.originIata + " to " + flight.destinationIata)
     }
     
     func airportCard(airport: String, type: Airport) -> some View {
